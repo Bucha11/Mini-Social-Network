@@ -2,74 +2,52 @@ import { DELETE_POST, IPostsTypes, ADD_POST, LIKE_POST } from "./IPostsActions";
 import { initialState } from "./../InitialState/InitialState";
 import { combineReducers } from "redux";
 
-function AllIdPostsReducer(state = initialState, action: IPostsTypes) {
+const AllPostIdInitialState = initialState.posts.allIds;
+const AllPostInitialState = initialState.posts.byId;
+function AllIdPostsReducer(state = AllPostIdInitialState, action: IPostsTypes) {
   switch (action.type) {
     case ADD_POST: {
       const { id: newId } = action.payload;
       return {
         ...state,
-        posts: { ...state.posts.byId, allIds: [...state.users.allIds, newId] },
+        newId,
       };
     }
     case DELETE_POST: {
       return {
-        ...state,
-        posts: {
-          ...state.posts.byId,
-          allIds: state.users.allIds.filter((i) => i !== action.payload),
-        },
+        state: state.filter((i) => i !== action.payload.id),
       };
     }
 
-    case LIKE_POST: {
-      return {
-        ...state,
-        currentUser: action.payload,
-      };
-    }
     default:
       return state;
   }
 }
 
-function PostsByIdReducer(state = initialState, action: IPostsTypes) {
+function PostsByIdReducer(state = AllPostInitialState, action: IPostsTypes) {
   switch (action.type) {
     case ADD_POST: {
       const { id: newId, text, author } = action.payload;
       return {
         ...state,
-        posts: {
-          ...state.posts.allIds,
-          byId: {
-            ...state.posts.byId,
-            newId: { id: newId, text, author, likes: [] },
-          },
-        },
+        newId: { id: newId, text, author, likes: [] },
       };
     }
     case DELETE_POST: {
-      const { payload: _, ...newPosts } = state.posts.byId;
+      const { payload: _, ...newPosts } = state;
       return {
-        ...state,
-        posts: {
-          ...state.posts.allIds,
-          byId: newPosts,
-        },
+        state: newPosts,
       };
     }
 
     case LIKE_POST: {
-      const { author: postAuthor, id: postId } = action.payload;
+      let { author: postAuthor, id: postId } = action.payload;
       return {
-        ...state,
-        posts: {
-          ...state.posts.allIds,
-          byId: {
-            ...state.posts.byId,
-            postId: {
-              ...state.posts.byId.postId,
-              likes: [...state.posts.byId.postId.likes, postAuthor],
-            },
+        state: {
+          ...state,
+          [postId]: {
+            ...state[postId],
+            likes: [...state[postId].likes, postAuthor],
           },
         },
       };
@@ -80,6 +58,6 @@ function PostsByIdReducer(state = initialState, action: IPostsTypes) {
 }
 
 export const PostsReducer = combineReducers({
-  AllIdPostsReducer,
-  PostsByIdReducer,
+  allIds: AllIdPostsReducer,
+  byId: PostsByIdReducer,
 });

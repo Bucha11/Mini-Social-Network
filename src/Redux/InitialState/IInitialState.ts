@@ -1,7 +1,6 @@
 export interface IInitialState {
   users: IUsers;
   posts: IPosts;
-  currentUser: string;
 }
 
 export interface IUser {
@@ -12,8 +11,10 @@ export interface IUser {
   following: Array<string>;
 }
 export interface IUsers {
+  [x: string]: any;
   byId: IGroupUsers;
   allIds: Array<string>;
+  currentUser: string;
 }
 
 export interface IPosts {

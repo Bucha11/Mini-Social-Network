@@ -13,10 +13,10 @@ export function AddPostAction(author: string, text: string): IPostsTypes {
   };
 }
 
-export function DeletePostAction(id: string): IPostsTypes {
+export function DeletePostAction(id: string, author: string): IPostsTypes {
   return {
     type: DELETE_POST,
-    payload: id,
+    payload: { id, author },
   };
 }
 

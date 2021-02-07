@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {useDispatch} from 'react-redux'
 import { useHistory } from 'react-router-dom';
-import { LoginAction } from '../../Redux/LoginReducer/LoginActions';
+import { LoginAction } from '../../Redux/UserReducer/UserAction';
+
 
 
 export const Login=()=> {

@@ -25,6 +25,7 @@ export const initialState: IInitialState = {
       },
     },
     allIds: ["user1", "user2", "user3"],
+    currentUser: "user1",
   },
   posts: {
     byId: {
@@ -49,5 +50,4 @@ export const initialState: IInitialState = {
     },
     allIds: ["post1", "post2", "post3"],
   },
-  currentUser: "",
 };
