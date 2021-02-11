@@ -1,28 +1,24 @@
 import { Utils } from "./../../Utils/Utils";
 
-import { ADD_POST, IPostsTypes, DELETE_POST, LIKE_POST } from "./IPostsActions";
-export function AddPostAction(author: string, text: string): IPostsTypes {
-  const id = Utils.getNewPostId();
+import { ADD_POST, IPostsTypes, DELETE_POST } from "./IPostsActions";
+export function AddPostAction(authorId: string, postText: string): IPostsTypes {
+  const postId = Utils.getNewPostId();
   return {
     type: ADD_POST,
     payload: {
-      id,
-      author,
-      text,
+      postId,
+      authorId,
+      postText,
     },
   };
 }
 
-export function DeletePostAction(id: string, author: string): IPostsTypes {
+export function DeletePostAction(
+  postId: string,
+  authorId: string
+): IPostsTypes {
   return {
     type: DELETE_POST,
-    payload: { id, author },
-  };
-}
-
-export function LikePostAction(id: string, author: string): IPostsTypes {
-  return {
-    type: LIKE_POST,
-    payload: { id, author },
+    payload: { postId, authorId },
   };
 }

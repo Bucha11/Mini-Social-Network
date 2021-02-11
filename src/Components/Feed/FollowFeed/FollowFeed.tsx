@@ -1,16 +1,22 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { feedPostsWithLikes } from '../../../Utils/Selectors';
-import { Post } from '../../Post/Post';
+import React from "react";
+import { useSelector } from "react-redux";
+import { FeedPostsWithLikes } from "../../../Utils/Selectors/FeedPostsWithLikes";
 
+import { Post } from "../../Post/Post";
 
-export const FollowFeed=()=> {
-  const feedPostsArray=useSelector(feedPostsWithLikes)
-  const renderFollowFeed=feedPostsArray.map(i=>{return <Post author={i.author}
-    text={i.text} key={i.id} likes={i.likes}/>})
-  return (
-    <div >
-    {renderFollowFeed}
-    </div>
-  );
-}
+export const FollowFeed = () => {
+  const FeedPostsArray = useSelector(FeedPostsWithLikes);
+  const RenderFollowFeed = FeedPostsArray.map((i) => {
+    return (
+      <Post
+        authorName={i.authorName}
+        authorId={i.authorId}
+        postText={i.postText}
+        key={i.postId}
+        likes={i.likes}
+        postId={i.postId}
+      />
+    );
+  });
+  return <div>{RenderFollowFeed}</div>;
+};

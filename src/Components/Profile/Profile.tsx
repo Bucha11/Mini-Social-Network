@@ -1,12 +1,11 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-
-export const Profile=()=> {
+export const Profile = () => {
   return (
-    <div >
+    <div>
       Profile
-      <NavLink to='/feed/allfeed'>В ленту</NavLink>
+      <NavLink to="/feed/allfeed">В ленту</NavLink>
     </div>
   );
-}
+};

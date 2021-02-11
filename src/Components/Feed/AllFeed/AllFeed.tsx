@@ -1,16 +1,22 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { allPostsWithLikes } from '../../../Utils/Selectors';
-import { Post } from '../../Post/Post';
+import React from "react";
+import { useSelector } from "react-redux";
+import { AllPostsWithLikes } from "../../../Utils/Selectors/AllPostsWithLikes";
 
+import { Post } from "../../Post/Post";
 
-export const AllFeed=()=> {
-  const allPostsArray=useSelector(allPostsWithLikes)
-  const renderAllFeed=allPostsArray.map(i=>{return <Post author={i.author}
-     text={i.text} key={i.id} likes={i.likes}/>})
-  return (
-    <div >
-      {renderAllFeed}
-    </div>
-  );
-}
+export const AllFeed = () => {
+  const AllPostsArray = useSelector(AllPostsWithLikes);
+  const RenderAllFeed = AllPostsArray.map((i) => {
+    return (
+      <Post
+        authorName={i.authorName}
+        authorId={i.authorId}
+        postText={i.postText}
+        key={i.postId}
+        likes={i.likes}
+        postId={i.postId}
+      />
+    );
+  });
+  return <div>{RenderAllFeed}</div>;
+};

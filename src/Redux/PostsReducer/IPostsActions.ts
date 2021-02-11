@@ -1,24 +1,18 @@
 export const ADD_POST = "ADD_POST";
 export const DELETE_POST = "DELETE_POST";
-export const LIKE_POST = "LIKE_POST";
 
 export interface IAddPost {
   type: typeof ADD_POST;
   payload: {
-    id: string;
-    author: string;
-    text: string;
+    postId: string;
+    authorId: string;
+    postText: string;
   };
 }
 
 export interface IDeletePost {
   type: typeof DELETE_POST;
-  payload: { id: string; author: string };
+  payload: { postId: string; authorId: string };
 }
 
-export interface ILikePost {
-  type: typeof LIKE_POST;
-  payload: { id: string; author: string };
-}
-
-export type IPostsTypes = IAddPost | IDeletePost | ILikePost;
+export type IPostsTypes = IAddPost | IDeletePost;

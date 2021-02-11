@@ -1,4 +1,4 @@
-import { DELETE_POST, IPostsTypes, ADD_POST, LIKE_POST } from "./IPostsActions";
+import { DELETE_POST, IPostsTypes, ADD_POST } from "./IPostsActions";
 import { initialState } from "./../InitialState/InitialState";
 import { combineReducers } from "redux";
 
@@ -7,7 +7,7 @@ const AllPostInitialState = initialState.posts.byId;
 function AllIdPostsReducer(state = AllPostIdInitialState, action: IPostsTypes) {
   switch (action.type) {
     case ADD_POST: {
-      const { id: newId } = action.payload;
+      const { postId: newId } = action.payload;
       return {
         ...state,
         newId,
@@ -15,7 +15,7 @@ function AllIdPostsReducer(state = AllPostIdInitialState, action: IPostsTypes) {
     }
     case DELETE_POST: {
       return {
-        state: state.filter((i) => i !== action.payload.id),
+        state: state.filter((i) => i !== action.payload.postId),
       };
     }
 
@@ -27,10 +27,10 @@ function AllIdPostsReducer(state = AllPostIdInitialState, action: IPostsTypes) {
 function PostsByIdReducer(state = AllPostInitialState, action: IPostsTypes) {
   switch (action.type) {
     case ADD_POST: {
-      const { id: newId, text, author } = action.payload;
+      const { postId: newId, postText, authorId } = action.payload;
       return {
         ...state,
-        newId: { id: newId, text, author, likes: [] },
+        newId: { id: newId, postText, authorId },
       };
     }
     case DELETE_POST: {
@@ -40,18 +40,6 @@ function PostsByIdReducer(state = AllPostInitialState, action: IPostsTypes) {
       };
     }
 
-    case LIKE_POST: {
-      let { author: postAuthor, id: postId } = action.payload;
-      return {
-        state: {
-          ...state,
-          [postId]: {
-            ...state[postId],
-            likes: [...state[postId].likes, postAuthor],
-          },
-        },
-      };
-    }
     default:
       return state;
   }

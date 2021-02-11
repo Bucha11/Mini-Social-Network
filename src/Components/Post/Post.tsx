@@ -1,20 +1,19 @@
-import React from 'react';
+import React from "react";
+import { IFullPost } from "../../Utils/Selectors/IFullpost";
 
-import { IPostPropsTypes } from './IPost';
-
-
-export const Post=(props:IPostPropsTypes)=> {
- 
-  const likesList=props.likes.map(i=>{return <div key={i.id}>{i.name}</div>})
-debugger
+export const Post = (props: IFullPost) => {
+  const LikesList = props.likes.map((i) => {
+    return <div key={i.userLikeId}>{i.userLikeName}</div>;
+  });
+  debugger;
   return (
     <div>
-     <div>{props.author}</div> 
-     <div> {props.text}</div> 
-    <div >
-      Понравилось:
-   {likesList}   
-    </div>
+      <div>{props.authorName}</div>
+      <div> {props.postText}</div>
+      <div>
+        Понравилось:
+        {LikesList}
+      </div>
     </div>
   );
-}
+};
